@@ -1,0 +1,52 @@
+-- Rayfield Menu Base (Perte de temps / Exemple)
+-- Assure-toi d'avoir Rayfield chargé avant ce script
+
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/.../rayfield.lua'))() -- Remplace par le vrai lien
+
+local Window = Rayfield:CreateWindow({
+   Name = "Mon Menu LostFront (Légal)",
+   LoadingTitle = "Chargement...",
+   LoadingSubtitle = "Par ton pseudo",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "LostFrontMenu", -- Dossier où sauvegarder les prefs
+      FileName = "config"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "discord.gg/example",
+      RememberJoins = true
+   },
+   KeySystem = false, -- Mets true si tu veux un key system
+   Theme = "Default" -- ou "Dark", "Light"
+})
+
+-- Exemple de onglet
+local Tab = Window:CreateTab("Home", 44833624594) -- ID de l'icône
+
+local Section = Tab:CreateSection("Options")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Activer ESP",
+   CurrentValue = false,
+   Callback = function(Value)
+      print("ESP activé : " .. tostring(Value))
+      -- Ici tu mets ton code ESP
+   end
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "Vitesse de marche",
+   Range = {16, 100},
+   Increment = 1,
+   CurrentValue = 16,
+   Callback = function(Value)
+      -- Applique la vitesse au personnage
+      local character = game.Players.LocalPlayer.Character
+      if character and character:FindFirstChild("Humanoid") then
+         character.Humanoid.WalkSpeed = Value
+      end
+   end
+})
+
+-- Plus d'éléments : Button, Input, Dropdown, etc.
